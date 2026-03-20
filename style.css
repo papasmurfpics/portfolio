@@ -128,3 +128,15 @@ body::before {
     background: var(--neon);
     color: var(--bg);
 }
+@keyframes glitch-anim {
+  0% { text-shadow: 2px 0 var(--neon), -2px 0 var(--re-red); transform: translate(0); }
+  20% { text-shadow: -2px 0 var(--neon), 2px 0 var(--re-red); transform: translate(-2px, 2px); }
+  40% { text-shadow: 2px 0 var(--re-red), -2px 0 var(--neon); transform: translate(-2px, -2px); }
+  100% { text-shadow: none; transform: translate(0); }
+}
+
+.subject-name:hover {
+    animation: glitch-anim 0.2s infinite;
+    color: #fff;
+    cursor: wait;
+}
