@@ -53,3 +53,14 @@
 </body>
 </html>
 }
+<audio id="click-sound" src="sounds/click.mp3"></audio>
+
+<script>
+    const sound = document.getElementById("click-sound");
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            sound.currentTime = 0;
+            sound.play();
+        });
+    });
+</script>
