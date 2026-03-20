@@ -3,47 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personnel Terminal | v2.0.4</title>
+    <title>Bio-Medical Terminal v4.0</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="logo">NODE<span>_01</span></div>
-        <div class="nav-links">
-            <a href="index.html" class="active">HOME // ホーム</a>
-            <a href="about.html">ABOUT // プロフィール</a>
-            <a href="projects.html">QUESTS // クエスト</a>
-        </div>
-    </nav>
+    <div class="bg-overlay"></div>
 
-    <main class="hero-container">
-        <div class="glass-panel">
-            
-            <div class="profile-wrapper">
-                <div class="hex-frame">
-                    <img src="images/profile.jpg" alt="Personnel" class="profile-img">
+    <div class="app-wrapper">
+        
+        <header>
+            <div class="logo" style="font-family: 'Special Elite'; font-size: 1.5rem;">BIOHAZARD <span style="color: var(--re-red);">RE</span></div>
+            <div class="system-status">
+                <div class="pulse-dot"></div>
+                System Condition: FINE // 2026.03.20
+            </div>
+        </header>
+
+        <aside class="sidebar">
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active">01 // SUBJECT_DASH</a></li>
+                    <li><a href="about.html">02 // PERSONNEL_LOG</a></li>
+                    <li><a href="projects.html">03 // ACTIVE_QUESTS</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-meta" style="font-size: 0.7rem; color: #444;">
+                LOC: TOKYO_DISTRICT_7<br>
+                SEC_LEVEL: 04-S
+            </div>
+        </aside>
+
+        <main class="main-terminal">
+            <div class="corner tl"></div>
+            <div class="corner br"></div>
+            <div class="jp-stamp">極秘 (TOP SECRET)</div>
+
+            <div class="profile-container">
+                <img src="images/profile.jpg" alt="Subject Profile">
+                <div style="position: absolute; bottom: 10px; left: 10px; font-size: 10px; background: black; padding: 2px 5px;">
+                    SCAN_ID: 88-421
                 </div>
             </div>
 
-            <div class="info-section">
-                <span class="jp-title">デジタル・アーキテクト</span>
-                <h1 class="name-title">[YOUR NAME]</h1>
-                <p class="tagline">SYSTEM_ARCHITECT // GRADE 12 // TOKYO_INTEL</p>
+            <div class="file-data">
+                <h2 style="font-family: 'Rajdhani'; font-size: 3rem; margin: 0; color: white;">[YOUR NAME]</h2>
+                <p style="color: var(--re-cyan); font-family: 'Rajdhani'; margin-bottom: 2rem;">CLASS: GRADE 12 ICT ARCHITECT</p>
                 
-                <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; max-width: 450px;">
-                    Specializing in high-performance digital interfaces and tactical software deployment. 
-                    Authorized access only. System status: <span style="color: var(--accent-cyan);">STABLE</span>.
+                <p style="font-size: 0.9rem; line-height: 1.8;">
+                    > ACCESSING PERSONNEL DATA...<br>
+                    > BACKGROUND: Specialized in digital deployment and tactical UI design.<br>
+                    > REMARKS: High potential for full-stack system architecture. Current location verified within Tokyo Node.
                 </p>
 
-                <div class="btn-group">
-                    <a href="projects.html" class="btn btn-primary">Initialize Access</a>
-                    <a href="about.html" class="btn btn-secondary">System Logs</a>
+                <div style="margin-top: 30px;">
+                    <div style="font-size: 0.8rem; margin-bottom: 5px;">SYNC_STABILITY: 98%</div>
+                    <div style="height: 4px; width: 100%; background: #222;">
+                        <div style="height: 100%; width: 98%; background: var(--re-green);"></div>
+                    </div>
                 </div>
             </div>
+        </main>
 
-        </div>
-    </main>
+        <footer>
+            <div>IP: 192.168.1.0 // CACHE: CLEARED</div>
+            <div>PROPERTY OF UMBRELLA_CORP. © 2026</div>
+        </footer>
+
+    </div>
 
 </body>
 </html>
