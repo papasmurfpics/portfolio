@@ -2,118 +2,115 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POLICE_ARCHIVE_TPD</title>
+    <title>METRO_POLICE_ARCHIVE</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div id="cursor"></div>
 
-    <div id="login-overlay" onclick="startScan()">
-        <div style="font-family: 'DotGothic16'; color: var(--neon);">警視庁 - 認証</div>
-        <h2 id="status-text" style="font-size: 3.5rem; color: #fff; letter-spacing: 8px;">RESTRICTED</h2>
-        
-        <div class="scan-bar-container" id="bar-frame">
-            <div id="scan-fill"></div>
-        </div>
-        
-        <p id="prompt" style="margin-top: 20px; color: var(--dim); letter-spacing: 3px;">[ CLICK TO SCAN BIOMETRICS ]</p>
+    <div id="login-overlay" onclick="runBiometrics()">
+        <div style="font-family: 'DotGothic16'; color: var(--neon); margin-bottom: 10px;">警視庁 // AUTHENTICATION</div>
+        <h2 id="log-status" style="font-size: 3rem; color: #fff; letter-spacing: 10px;">RESTRICTED</h2>
+        <div class="scan-bar" id="bar-container"><div id="scan-progress"></div></div>
+        <p id="instruction" style="color: var(--dim); margin-top: 20px;">[ CLICK TO INITIATE BIOMETRIC SCAN ]</p>
     </div>
 
-    <div class="hud-frame">
+    <div class="hud-frame" id="main-frame">
         <div class="corner tl"></div><div class="corner tr"></div>
         <div class="corner bl"></div><div class="corner br"></div>
 
-        <div class="hud-data" style="grid-column: 1;">
-            DEPT: TOKYO_METRO_PD<br>UNIT: CYBER_DIV_09
+        <div style="grid-column: 1; font-size: 1rem; color: var(--dim);">
+            UNIT: TOKYO_METRO_PD<br>STATUS: <span style="color:#00ff00;">ONLINE</span>
         </div>
-        <div class="hud-data" style="grid-column: 3; text-align: right;">
-            TIME: <span id="live-clock">00:00:00</span>
+
+        <div style="grid-column: 3; text-align: right; font-size: 1rem; color: var(--dim);">
+            SYS_TIME: <span id="clock">00:00:00</span>
         </div>
 
         <main class="main-display">
-            <h1 class="subject-name" id="typewriter-title"></h1>
+            <div class="photo-scan-container">
+                <img src="images/profile.jpg" alt="Subject" class="id-photo">
+            </div>
+
+            <h1 class="subject-name" id="title-text"></h1>
+            
             <nav class="nav-group">
                 <a href="about.html" class="nav-item">> OFFICER_DOSSIER</a>
                 <a href="projects.html" class="nav-item">> SERVICE_RECORDS</a>
             </nav>
         </main>
-
-        <div class="hud-data" style="grid-row: 3; align-self: end;">
-            LAT: 35.6895° N<br>LNG: 139.6917° E
-        </div>
     </div>
 
-    <audio id="snd-scan" src="https://www.soundjay.com/button/sounds/button-20.mp3"></audio>
-    <audio id="snd-success" src="https://www.soundjay.com/button/sounds/button-09.mp3"></audio>
-
     <script>
-        // Custom Cursor Logic
+        // Cursor
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        // Biometric Scan Sequence
-        function startScan() {
-            const barFrame = document.getElementById('bar-frame');
-            const fill = document.getElementById('scan-fill');
-            const status = document.getElementById('status-text');
-            const prompt = document.getElementById('prompt');
-            const sndScan = document.getElementById('snd-scan');
-            const sndSuccess = document.getElementById('snd-success');
+        // Biometrics
+        function runBiometrics() {
+            const bar = document.getElementById('bar-container');
+            const progress = document.getElementById('scan-progress');
+            const status = document.getElementById('log-status');
+            const instruct = document.getElementById('instruction');
 
-            // 1. Start Visuals
-            prompt.style.display = 'none';
-            barFrame.style.display = 'block';
+            instruct.style.display = 'none';
+            bar.style.display = 'block';
             status.innerText = "SCANNING...";
-            sndScan.play();
 
-            let width = 0;
-            const interval = setInterval(() => {
-                if (width >= 100) {
-                    clearInterval(interval);
-                    // 2. Success Sequence
+            let w = 0;
+            const timer = setInterval(() => {
+                w += Math.random() * 20;
+                if (w >= 100) {
+                    w = 100;
+                    clearInterval(timer);
                     status.innerText = "ACCESS GRANTED";
                     status.style.color = "#00ff41";
-                    sndSuccess.play();
-                    
                     setTimeout(() => {
                         document.getElementById('login-overlay').style.opacity = '0';
                         setTimeout(() => {
                             document.getElementById('login-overlay').style.display = 'none';
-                            runTypewriter();
+                            typeTitle();
                         }, 800);
                     }, 1000);
-                } else {
-                    width += Math.random() * 15;
-                    if (width > 100) width = 100;
-                    fill.style.width = width + "%";
                 }
-            }, 200);
+                progress.style.width = w + "%";
+            }, 150);
         }
 
-        // Typewriter Effect
-        function runTypewriter() {
-            const title = document.getElementById('typewriter-title');
-            const text = "CENTRAL_ARCHIVE";
+        // Typewriter
+        function typeTitle() {
+            const title = document.getElementById('title-text');
+            const str = "CENTRAL_ARCHIVE";
             let i = 0;
-            function type() {
-                if (i < text.length) {
-                    title.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, 100);
-                }
-            }
-            type();
+            const t = setInterval(() => {
+                title.innerHTML += str[i];
+                i++;
+                if (i >= str.length) clearInterval(t);
+            }, 100);
         }
 
         // Clock
         setInterval(() => {
-            document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('en-GB');
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-GB');
         }, 1000);
+
+        // Frame Flash on Hover
+        document.querySelectorAll('.nav-item').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                const frame = document.getElementById('main-frame');
+                frame.style.borderColor = 'var(--re-red)';
+                frame.style.boxShadow = 'inset 0 0 20px rgba(188, 0, 45, 0.2)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                const frame = document.getElementById('main-frame');
+                frame.style.borderColor = 'var(--dim)';
+                frame.style.boxShadow = 'none';
+            });
+        });
     </script>
 </body>
 </html>
