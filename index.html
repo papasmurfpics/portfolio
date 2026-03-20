@@ -3,34 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Start Game | Welcome</title>
+    <title>Personnel_File_01</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <nav class="navbar">
-        <div class="logo">PLAYER_ONE.EXE</div>
+        <div class="logo">BIOHAZARD</div>
         <div class="nav-links">
-            <a href="index.html" class="active">ホーム (HOME)</a>
-            <a href="about.html">プロフィール (ABOUT)</a>
-            <a href="projects.html">クエスト (QUESTS)</a>
+            <a href="index.html">DASHBOARD</a>
+            <a href="about.html">BIODATA</a>
+            <a href="projects.html">ARCHIVES</a>
         </div>
     </nav>
 
     <div class="container">
-        <div class="game-card">
-            <div class="side-tag">いらっしゃいませ</div>
-            <img src="images/profile.jpg" alt="Avatar" class="profile-img">
-            <h1 style="text-align:center; font-family:'Orbitron'; color:var(--kawaii-pink);">USER: [YOUR NAME]</h1>
-            <p style="text-align:center; font-size: 1.2rem;">Ready to start the adventure? ☆</p>
+        <div class="terminal-card">
+            <div class="hazard-tape"></div>
+            <div class="vertical-jp">警告・システム異常</div>
             
-            <div style="margin-top:2rem;">
-                <span class="stat-label">ENERGY LEVEL</span>
-                <div class="stat-bar"><div class="fill" style="width: 100%;"></div></div>
+            <div class="profile-hex">
+                <img src="images/profile.jpg" alt="Subject Profile">
             </div>
-            
-            <a href="about.html" class="btn">PRESS START</a>
+
+            <h1 style="text-align: center; font-family: 'Stalinist One'; color: var(--blood-red);">[YOUR NAME]</h1>
+            <p style="text-align: center; color: #666; font-size: 0.8rem;">ID: #SHIBUYA-RE-2026</p>
+
+            <div style="margin-top: 2rem;">
+                <span class="status-label">SYSTEM SYNC (HTML/CSS)</span>
+                <div class="status-container"><div class="status-fill" style="width: 88%;"></div></div>
+
+                <span class="status-label">DATA RETRIEVAL (JS)</span>
+                <div class="status-container"><div class="status-fill" style="width: 65%;"></div></div>
+            </div>
+
+            <a href="about.html" class="btn-action">ACCESS PERSONNEL LOGS</a>
         </div>
     </div>
+
 </body>
 </html>
-}
