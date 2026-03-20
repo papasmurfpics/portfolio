@@ -1,126 +1,190 @@
-@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Stalinist+One&family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Noto+Sans+JP:wght@300;700&family=Rajdhani:wght@500;700&display=swap');
 
 :root {
-    --blood-red: #bc002d;
-    --terminal-green: #00ff41;
-    --dark-carbon: #080808;
-    --panel-border: #333;
-    --glitch-color: rgba(255, 0, 0, 0.3);
+    --bg-color: #050608;
+    --glass-bg: rgba(15, 20, 25, 0.7);
+    --accent-cyan: #00f3ff;
+    --accent-red: #ff4d4d;
+    --text-main: #e0e6ed;
+    --text-dim: #94a3b8;
+    --border-glass: rgba(255, 255, 255, 0.1);
 }
 
-* { box-sizing: border-box; cursor: crosshair; scroll-behavior: smooth; }
+* { box-sizing: border-box; transition: all 0.3s ease; }
 
 body {
     margin: 0;
-    background-color: var(--dark-carbon);
-    color: #eee;
-    font-family: 'Special Elite', 'DotGothic16', sans-serif;
-    /* CRT Scanline Effect Overlay */
-    background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
-                      repeating-linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.01));
-    background-size: 100% 4px, 3px 100%;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+    /* Realistic dark industrial texture */
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(0, 243, 255, 0.03), transparent),
+        url('https://www.transparenttextures.com/patterns/dark-matter.png');
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Animations */
-@keyframes flicker {
-    0% { opacity: 0.97; } 5% { opacity: 0.9; } 10% { opacity: 1; } 100% { opacity: 0.98; }
-}
-
-@keyframes glitch {
-    0% { text-shadow: 2px 0 var(--blood-red), -2px 0 var(--terminal-green); }
-    50% { text-shadow: -2px 0 var(--blood-red), 2px 0 var(--terminal-green); }
-    100% { text-shadow: 2px 0 var(--blood-red), -2px 0 var(--terminal-green); }
-}
-
-/* Navigation */
+/* --- Glassmorphism Navigation --- */
 .navbar {
     display: flex;
     justify-content: space-between;
-    padding: 1.5rem 8%;
-    background: #000;
-    border-bottom: 2px solid var(--blood-red);
-    position: sticky; top: 0; z-index: 100;
+    align-items: center;
+    padding: 1.5rem 10%;
+    background: rgba(10, 12, 15, 0.8);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border-glass);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.logo { font-family: 'Stalinist One'; color: var(--blood-red); animation: glitch 0.2s infinite; }
+.logo {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--text-main);
+}
+
+.logo span { color: var(--accent-cyan); }
 
 .nav-links a {
     text-decoration: none;
-    color: #888;
-    margin-left: 20px;
-    font-size: 0.8rem;
-    text-transform: uppercase;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    font-family: 'Rajdhani', sans-serif;
+    margin-left: 30px;
+    letter-spacing: 1px;
 }
 
-.nav-links a:hover { color: var(--terminal-green); }
+.nav-links a:hover, .active {
+    color: var(--accent-cyan);
+    text-shadow: 0 0 10px var(--accent-cyan);
+}
 
-/* Main UI Layout */
-.container {
+/* --- Main Glass Terminal --- */
+.hero-container {
+    flex: 1;
     display: flex;
     justify-content: center;
-    padding: 3rem 1.5rem;
-    animation: flicker 0.1s infinite;
+    align-items: center;
+    padding: 2rem;
 }
 
-.terminal-card {
-    background: rgba(10, 10, 10, 0.95);
-    border: 1px solid var(--panel-border);
-    max-width: 800px;
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-glass);
+    border-radius: 4px;
     width: 100%;
+    max-width: 900px;
     padding: 3rem;
+    display: flex;
+    gap: 3rem;
     position: relative;
-    box-shadow: 0 0 40px rgba(0,0,0,1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
-/* Japanese Hazard Tape */
-.hazard-tape {
+/* Decoration Elements (Tactical Feel) */
+.glass-panel::before {
+    content: "L-NODE: TOKYO // STATUS: OPERATIONAL";
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 12px;
-    background: repeating-linear-gradient(-45deg, #000, #000 10px, var(--blood-red) 10px, var(--blood-red) 20px);
+    top: 10px;
+    left: 20px;
+    font-size: 10px;
+    font-family: 'Rajdhani';
+    color: var(--accent-cyan);
+    opacity: 0.6;
 }
 
-.vertical-jp {
-    position: absolute;
-    right: 15px; top: 50px;
-    writing-mode: vertical-rl;
-    font-family: 'DotGothic16';
-    color: var(--blood-red);
-    font-size: 0.9rem;
+/* Profile Image Hexagon */
+.profile-wrapper {
+    flex-shrink: 0;
+    position: relative;
+}
+
+.hex-frame {
+    width: 200px;
+    height: 220px;
+    background: #1a1d23;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--accent-cyan);
+}
+
+.profile-img {
+    width: 190px;
+    height: 210px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    object-fit: cover;
+    filter: grayscale(0.3) contrast(1.1);
+}
+
+/* Content Section */
+.info-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.jp-title {
+    font-family: 'Noto Sans JP';
+    font-size: 1rem;
+    color: var(--accent-red);
+    margin-bottom: 0.5rem;
     letter-spacing: 5px;
 }
 
-/* Profile Elements */
-.profile-hex {
-    width: 150px; height: 150px;
-    background: #222;
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    border: 2px solid var(--blood-red);
-    margin: 0 auto 1.5rem;
-    overflow: hidden;
+.name-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 3rem;
+    margin: 0;
+    line-height: 1;
+    text-transform: uppercase;
 }
 
-.profile-hex img {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(1) sepia(0.5) contrast(1.3);
+.tagline {
+    color: var(--accent-cyan);
+    font-size: 0.9rem;
+    margin: 1rem 0;
+    font-family: 'Rajdhani';
+    letter-spacing: 2px;
 }
 
-/* Status Bars */
-.status-label { font-size: 0.7rem; color: var(--terminal-green); margin-bottom: 5px; display: block;}
-.status-container {
-    height: 10px; background: #111;
-    border: 1px solid #333; margin-bottom: 1.5rem;
-}
-.status-fill {
-    height: 100%; background: var(--terminal-green);
-    box-shadow: 0 0 10px var(--terminal-green);
+/* Buttons */
+.btn-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 2rem;
 }
 
-.btn-action {
-    display: block; width: 100%; text-align: center;
-    background: var(--blood-red); color: white;
-    text-decoration: none; padding: 15px;
-    font-family: 'Stalinist One'; font-size: 0.7rem;
-    margin-top: 2rem; border: none;
+.btn {
+    padding: 12px 25px;
+    text-decoration: none;
+    font-family: 'Rajdhani';
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    text-transform: uppercase;
 }
 
-.btn-action:hover { background: #ff0000; }
+.btn-primary {
+    background: var(--accent-cyan);
+    color: #000;
+}
+
+.btn-primary:hover {
+    background: #fff;
+    box-shadow: 0 0 20px var(--accent-cyan);
+}
+
+.btn-secondary {
+    border: 1px solid var(--text-dim);
+    color: var(--text-white);
+}
+
+.btn-secondary:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
