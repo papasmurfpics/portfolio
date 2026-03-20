@@ -1,141 +1,126 @@
-@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Special+Elite&family=Rajdhani:wght@700&display=swap');
+/* Pixel Fonts for that authentic 8-bit tech look */
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=VT323&display=swap');
 
 :root {
-    --re-red: #8a0303;
-    --re-cyan: #00f3ff;
-    --re-green: #00ff41;
-    --glass: rgba(0, 0, 0, 0.7);
-    --border: rgba(255, 255, 255, 0.1);
+    --monitor-bg: #0a0c0f;
+    --interface-cyan: #7ec2c2; /* Dimmed teal from the image */
+    --hazard-dim: #4a5c5c;
+    --text-main: #9cb4b4;
 }
 
-* { box-sizing: border-box; cursor: crosshair; }
+* { box-sizing: border-box; }
 
-body, html {
+body {
     margin: 0;
-    padding: 0;
-    width: 100%;
+    background-color: #000;
+    color: var(--text-main);
+    font-family: 'VT323', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
-    background: #000;
-    color: #fff;
-    font-family: 'Rajdhani', sans-serif;
     overflow: hidden;
 }
 
-/* --- The SOMA/RE Background Filter --- */
-.bg-video-effect {
+/* --- Scanline / Dither Overlay --- */
+body::after {
+    content: " ";
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: url('images/profile.jpg') no-repeat center center;
-    background-size: cover;
-    filter: brightness(0.3) contrast(1.4) grayscale(0.7) sepia(0.2);
-    z-index: -1;
-}
-
-/* Scanlines & Vignette */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: 
-        repeating-linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0.2) 2px, rgba(0,0,0,0) 4px),
-        radial-gradient(circle, transparent 30%, rgba(0,0,0,0.8) 100%);
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 2px;
+    z-index: 100;
     pointer-events: none;
-    z-index: 10;
 }
 
-/* --- Main Menu Layout --- */
-.title-screen {
-    height: 100vh;
+/* --- The ID Plate --- */
+.id-card {
+    width: 500px;
+    border: 2px solid var(--hazard-dim);
+    background-color: var(--monitor-bg);
+    padding: 15px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Header Bars */
+.header-row {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 10%;
-    background: linear-gradient(to right, rgba(0,0,0,0.8), transparent);
+    justify-content: space-between;
+    border-bottom: 1px solid var(--hazard-dim);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
 }
 
-.game-logo {
-    font-family: 'Special Elite', serif;
-    font-size: 4rem;
-    color: #fff;
-    margin-bottom: 50px;
-    text-transform: uppercase;
-    letter-spacing: -2px;
-    animation: glitch 3s infinite;
-}
+.signal-status { font-size: 0.8rem; letter-spacing: 2px; }
 
-.game-logo span { color: var(--re-red); }
-
-/* --- Slanted Arcade Buttons --- */
-.menu-container {
-    display: flex;
-    flex-direction: column;
+/* Main Data Section */
+.profile-section {
+    display: grid;
+    grid-template-columns: 240px 1fr;
     gap: 15px;
-    width: 350px;
 }
 
-.menu-btn {
-    background: var(--glass);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--border);
-    border-left: 4px solid #fff;
-    padding: 15px 30px;
-    text-decoration: none;
-    color: #eee;
-    font-size: 1.4rem;
-    text-transform: uppercase;
-    clip-path: polygon(0 0, 95% 0, 100% 100%, 0 100%);
-    transition: 0.2s;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.photo-box {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--hazard-dim);
+    overflow: hidden;
 }
 
-.menu-btn:hover {
-    background: #fff;
-    color: #000;
-    transform: translateX(15px);
-    border-left-color: var(--re-red);
+.photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* This makes the image look like a pixelated CRT scan */
+    filter: grayscale(1) contrast(1.2) brightness(0.8);
+    image-rendering: pixelated; 
 }
 
-.menu-btn small {
-    font-family: 'DotGothic16';
-    font-size: 0.7rem;
-    opacity: 0.6;
+.data-block {
+    font-size: 0.9rem;
+    line-height: 1.2;
 }
 
-/* --- HUD Elements --- */
-.bottom-hud {
-    position: fixed;
-    bottom: 40px;
-    left: 10%;
-    right: 10%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    border-top: 1px solid var(--border);
-    padding-top: 20px;
-}
-
-.condition-box {
-    color: var(--re-green);
+.jp-text {
+    font-family: 'DotGothic16', sans-serif;
+    color: var(--interface-cyan);
     font-size: 0.8rem;
+    margin: 5px 0;
+}
+
+/* Navigation as Secured Links */
+.nav-block {
+    margin-top: 15px;
+    border-top: 1px solid var(--hazard-dim);
+    padding-top: 15px;
+}
+
+.nav-item {
+    display: block;
+    text-decoration: none;
+    color: var(--interface-cyan);
+    border: 1px solid var(--hazard-dim);
+    margin-bottom: 8px;
+    padding: 8px;
+    background: rgba(126, 194, 194, 0.05);
+    text-align: center;
+    letter-spacing: 3px;
+    font-size: 1.3rem;
+}
+
+.nav-item:hover {
+    background: var(--interface-cyan);
+    color: #000;
+}
+
+/* Authorization Text */
+.auth-footer {
+    margin-top: 15px;
+    font-size: 0.75rem;
+    color: var(--hazard-dim);
     text-transform: uppercase;
-}
-
-.pulse {
-    display: inline-block;
-    width: 10px; height: 10px;
-    background: var(--re-green);
-    border-radius: 50%;
-    margin-right: 10px;
-    box-shadow: 0 0 10px var(--re-green);
-    animation: blink 1.5s infinite;
-}
-
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-@keyframes glitch {
-    0% { transform: skew(0deg); }
-    2% { transform: skew(10deg); color: var(--re-cyan); }
-    4% { transform: skew(-10deg); color: var(--re-red); }
-    5% { transform: skew(0deg); }
+    text-align: justify;
+    line-height: 1.1;
 }
