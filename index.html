@@ -3,74 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bio-Medical Terminal v4.0</title>
+    <title>S.Y.S.T.E.M_OVERRIDE</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="bg-overlay"></div>
+    <div class="background-subject"></div>
 
-    <div class="app-wrapper">
+    <main class="full-screen-hud">
         
-        <header>
-            <div class="logo" style="font-family: 'Special Elite'; font-size: 1.5rem;">BIOHAZARD <span style="color: var(--re-red);">RE</span></div>
-            <div class="system-status">
-                <div class="pulse-dot"></div>
-                System Condition: FINE // 2026.03.20
-            </div>
-        </header>
+        <nav class="side-menu">
+            <a href="index.html" class="menu-item">
+                <span>01 // メイン</span>
+                CONTINUE_
+            </a>
+            <a href="about.html" class="menu-item">
+                <span>02 // データ</span>
+                PERSONNEL_FILES
+            </a>
+            <a href="projects.html" class="menu-item">
+                <span>03 // 任務</span>
+                ACTIVE_QUESTS
+            </a>
+            <a href="#" class="menu-item">
+                <span>04 // 設定</span>
+                SYSTEM_OPTIONS
+            </a>
+        </nav>
 
-        <aside class="sidebar">
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html" class="active">01 // SUBJECT_DASH</a></li>
-                    <li><a href="about.html">02 // PERSONNEL_LOG</a></li>
-                    <li><a href="projects.html">03 // ACTIVE_QUESTS</a></li>
-                </ul>
-            </nav>
-            <div class="sidebar-meta" style="font-size: 0.7rem; color: #444;">
-                LOC: TOKYO_DISTRICT_7<br>
-                SEC_LEVEL: 04-S
-            </div>
-        </aside>
-
-        <main class="main-terminal">
-            <div class="corner tl"></div>
-            <div class="corner br"></div>
-            <div class="jp-stamp">極秘 (TOP SECRET)</div>
-
-            <div class="profile-container">
-                <img src="images/profile.jpg" alt="Subject Profile">
-                <div style="position: absolute; bottom: 10px; left: 10px; font-size: 10px; background: black; padding: 2px 5px;">
-                    SCAN_ID: 88-421
-                </div>
+        <section class="hud-display">
+            <div class="header-data">
+                <p style="color: var(--hazard-red); margin: 0;">[ WARNING: BIO-SIGNATURE DETECTED ]</p>
+                <h1 class="glitch-title">PLAYER_01</h1>
+                <p style="letter-spacing: 5px;">GRADE 12 // ICT ARCHITECT // TOKYO_NODE</p>
             </div>
 
-            <div class="file-data">
-                <h2 style="font-family: 'Rajdhani'; font-size: 3rem; margin: 0; color: white;">[YOUR NAME]</h2>
-                <p style="color: var(--re-cyan); font-family: 'Rajdhani'; margin-bottom: 2rem;">CLASS: GRADE 12 ICT ARCHITECT</p>
+            <div class="technical-stats">
+                <div class="status-row"><span>SYNC_LEVEL:</span> <span>98.4%</span></div>
+                <div class="status-row"><span>HEART_RATE:</span> <span>STABLE (72 BPM)</span></div>
+                <div class="status-row"><span>LOCATION:</span> <span>UNDEFINED // SHIBUYA_7</span></div>
                 
-                <p style="font-size: 0.9rem; line-height: 1.8;">
-                    > ACCESSING PERSONNEL DATA...<br>
-                    > BACKGROUND: Specialized in digital deployment and tactical UI design.<br>
-                    > REMARKS: High potential for full-stack system architecture. Current location verified within Tokyo Node.
-                </p>
-
-                <div style="margin-top: 30px;">
-                    <div style="font-size: 0.8rem; margin-bottom: 5px;">SYNC_STABILITY: 98%</div>
-                    <div style="height: 4px; width: 100%; background: #222;">
-                        <div style="height: 100%; width: 98%; background: var(--re-green);"></div>
-                    </div>
+                <div class="jp-alert" style="margin-top: 20px;">
+                    システムエラー // 警告: 未承認のアクセス
                 </div>
             </div>
-        </main>
 
-        <footer>
-            <div>IP: 192.168.1.0 // CACHE: CLEARED</div>
-            <div>PROPERTY OF UMBRELLA_CORP. © 2026</div>
-        </footer>
+            <div class="footer-meta" style="font-size: 0.7rem; color: #444;">
+                UMBRELLA OS v4.0.2 // ARCHIVE_088-A<br>
+                © 2026 RESEARCH & DEVELOPMENT
+            </div>
+        </section>
 
-    </div>
+    </main>
 
 </body>
 </html>
