@@ -11,23 +11,33 @@
             100% { opacity: 1; filter: brightness(1); }
         }
 
+        /* FIX: Ensure the main display doesn't grow past the HUD */
+        .main-display {
+            grid-column: 1/4; 
+            grid-row: 2;
+            align-items: stretch; 
+            position: relative; 
+            padding: 20px;
+            overflow: hidden; /* Keeps everything inside the border */
+        }
+
         .record-container {
             width: 100%;
             height: 100%;
-            overflow-y: auto;
+            overflow-y: scroll; /* Forces scrollbar within the box */
             padding-right: 15px;
+            padding-top: 20px;
         }
 
-        /* Custom Scrollbar for that Tech look */
-        .record-container::-webkit-scrollbar { width: 4px; }
-        .record-container::-webkit-scrollbar-track { background: var(--bg); }
-        .record-container::-webkit-scrollbar-thumb { background: var(--dim); }
+        /* Custom Scrollbar - Cyberpunk Style */
+        .record-container::-webkit-scrollbar { width: 6px; }
+        .record-container::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+        .record-container::-webkit-scrollbar-thumb { background: var(--neon); box-shadow: 0 0 10px var(--neon); }
 
         .case-file {
             border: 1px solid var(--dim);
             padding: 20px;
             margin-bottom: 20px;
-            position: relative;
             background: rgba(126, 194, 194, 0.02);
             transition: 0.3s;
         }
@@ -35,7 +45,7 @@
         .case-file:hover {
             border-color: var(--neon);
             background: rgba(126, 194, 194, 0.05);
-            transform: translateX(5px);
+            transform: scale(1.01);
         }
 
         .case-header {
@@ -47,23 +57,18 @@
             margin-bottom: 15px;
         }
 
-        .case-id { color: var(--neon); font-size: 0.9rem; letter-spacing: 2px; }
-        
-        .status-tag {
-            padding: 2px 10px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
+        .status-tag { padding: 2px 10px; font-size: 0.8rem; font-weight: bold; }
         .status-closed { background: var(--dim); color: var(--text); }
         .status-active { background: var(--success); color: #000; box-shadow: 0 0 10px var(--success); }
         .status-urgent { background: var(--re-red); color: #fff; animation: blink 1s infinite; }
 
-        .case-title { font-size: 1.8rem; color: #fff; margin-bottom: 10px; }
-        .case-desc { font-size: 1rem; color: var(--text); line-height: 1.4; }
-        
-        .back-btn { position: absolute; top: -40px; left: 0; color: var(--neon); text-decoration: none; }
+        .back-btn { 
+            color: var(--neon); 
+            text-decoration: none; 
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -74,74 +79,55 @@
         <div class="corner bl"></div><div class="corner br"></div>
 
         <div style="grid-column: 1; font-size: 1rem; color: var(--dim);">
-            DB: MISSION_LOGS<br>
-            USER: OFFICER_K
+            DB: MISSION_LOGS<br>USER: OFFICER_K
         </div>
 
-        <main class="main-display" style="grid-column: 1/4; align-items: stretch; position: relative; padding-top: 60px;">
-            <a href="index.html" class="back-btn">< RETURN_TO_TERMINAL</a>
-
+        <main class="main-display">
             <div class="record-container">
-                <h1 class="subject-name" style="text-align: left; font-size: 2.5rem; margin-bottom: 0;">SERVICE_RECORDS</h1>
+                <a href="index.html" class="back-btn">< BACK_TO_TERMINAL</a>
+                
+                <h1 class="subject-name" style="text-align: left; font-size: 2.5rem;">SERVICE_RECORDS</h1>
                 <div style="font-family: 'DotGothic16'; color: var(--neon); margin-bottom: 30px;">活動記録 // MISSION_HISTORY</div>
 
                 <div class="case-file">
                     <div class="case-header">
-                        <span class="case-id">CASE_ID: #8801-ALPHA</span>
+                        <span style="color:var(--neon)">CASE: #8801-ALPHA</span>
                         <span class="status-tag status-closed">STAMP: CLOSED</span>
                     </div>
-                    <div class="case-title">STUDENT COUNCIL OVERWATCH</div>
-                    <p class="case-desc">
-                        Coordinated campus-wide logistics and managed communication channels between administrative nodes and student populations. High success rate in conflict resolution.
-                    </p>
+                    <h3 style="color:#fff; margin-bottom:10px;">STUDENT COUNCIL OVERWATCH</h3>
+                    <p style="color:var(--text); line-height:1.4;">Coordinated campus-wide logistics and managed communication channels between administrative nodes and student populations.</p>
                 </div>
 
                 <div class="case-file">
                     <div class="case-header">
-                        <span class="case-id">CASE_ID: #8802-BETA</span>
+                        <span style="color:var(--neon)">CASE: #8802-BETA</span>
                         <span class="status-tag status-active">STAMP: ACTIVE</span>
                     </div>
-                    <div class="case-title">CYBER_DIV_DEBATE_TEAM</div>
-                    <p class="case-desc">
-                        Currently engaged in verbal tactical analysis. Deploying high-fidelity arguments in competitive environments to secure regional victories.
-                    </p>
+                    <h3 style="color:#fff; margin-bottom:10px;">CYBER_DIV_DEBATE_TEAM</h3>
+                    <p style="color:var(--text); line-height:1.4;">Engaged in tactical verbal analysis. Deploying high-fidelity arguments in competitive environments.</p>
                 </div>
 
                 <div class="case-file">
                     <div class="case-header">
-                        <span class="case-id">CASE_ID: #8803-GAMMA</span>
+                        <span style="color:var(--neon)">CASE: #8803-GAMMA</span>
                         <span class="status-tag status-urgent">STAMP: RESTRICTED</span>
                     </div>
-                    <div class="case-title">VARSITY_BASKETBALL_UNIT</div>
-                    <p class="case-desc">
-                        Physical conditioning and team-based tactical execution. Operating within high-speed kinetic environments to maximize point acquisition and defensive coverage.
-                    </p>
+                    <h3 style="color:#fff; margin-bottom:10px;">VARSITY_BASKETBALL_UNIT</h3>
+                    <p style="color:var(--text); line-height:1.4;">High-speed kinetic execution. Operating in physical environments to maximize defensive coverage and team efficiency.</p>
                 </div>
-
             </div>
         </main>
 
         <div class="hud-data" style="grid-row: 3; align-self: end;">
-            RECORDS_FETCHED: 3<br>
-            STABILITY: NOMINAL
+            RECORDS_FETCHED: 3
         </div>
     </div>
 
     <script>
-        // Custom Cursor
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
-        });
-
-        // Add hover sound to cases
-        document.querySelectorAll('.case-file').forEach(file => {
-            file.addEventListener('mouseenter', () => {
-                const hoverSnd = new Audio('https://www.soundjay.com/button/sounds/button-37.mp3');
-                hoverSnd.volume = 0.2;
-                hoverSnd.play();
-            });
         });
     </script>
 </body>
