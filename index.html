@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>METRO_POLICE | ARCHIVE_088</title>
+    <title>POLICE_ARCHIVE_TPD</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <div class="noise"></div>
+
     <div id="login-overlay" onclick="authenticate()">
-        <div style="font-family: 'DotGothic16'; color: var(--neon); font-size: 1rem; margin-bottom: 10px;">警視庁 - 制限エリア</div>
-        <h2 style="font-size: 3rem; color: #fff; letter-spacing: 10px;">RESTRICTED</h2>
-        <p style="color: var(--dim); margin-top: 20px; animation: pulse 1.5s infinite;">[ CLICK TO SCAN BIOMETRICS ]</p>
+        <div style="font-family: 'DotGothic16'; color: var(--neon); font-size: 1.2rem; margin-bottom: 10px;">警視庁 - セキュリティ</div>
+        <h2 style="font-size: 3.5rem; color: #fff; letter-spacing: 8px;">RESTRICTED_ACCESS</h2>
+        <p class="pulse-text">[ CLICK TO INITIATE SCAN ]</p>
     </div>
 
     <div class="hud-frame">
@@ -19,64 +21,82 @@
         <div class="corner bl"></div><div class="corner br"></div>
 
         <div class="hud-data" style="grid-column: 1;">
-            DEPT: ULAANBAATAR_METRO_PD<br>
-            UNIT: SEC_9_ARCHIVE
+            <div class="rec-indicator"><div class="dot"></div> LIVE_FEED</div>
+            DEPT: TOKYO_METRO_PD<br>
+            UNIT: CYBER_DIV_09
         </div>
         
         <div class="hud-data" style="grid-column: 3; text-align: right;">
-            TIME: <span id="live-clock">00:00:00</span><br>
-            AUTH: <span style="color: #00ff00;">GRANTED</span>
+            SYSTEM_TIME: <span id="live-clock">00:00:00</span><br>
+            STATUS: <span style="color: #00ff00;">ENCRYPTED</span>
         </div>
 
         <main class="main-display">
-            <div style="font-family: 'DotGothic16'; font-size: 1.2rem; color: var(--neon);">公式記録</div>
-            <h1 class="subject-name">CENTRAL_ARCHIVE</h1>
+            <div style="font-family: 'DotGothic16'; font-size: 1rem; color: var(--neon);">公式アーカイブ</div>
+            <h1 class="subject-name" id="typewriter-title"></h1>
             
-            <p style="text-align: center; color: var(--dim); max-width: 400px; line-height: 1.2;">
-                WARNING: INTERNAL AFFAIRS MONITORING ACTIVE. 
-                ALL ACCESS LOGS ARE PERMANENT.
+            <p style="text-align: center; color: var(--dim); max-width: 400px; font-size: 0.9rem;">
+                FEDERAL LAW PROHIBITS UNAUTHORIZED DATA RETRIEVAL. 
+                IP LOGGING IS CURRENTLY ACTIVE.
             </p>
 
             <nav class="nav-group">
-                <a href="about.html" class="nav-item">> OFFICER_SUVD</a>
+                <a href="about.html" class="nav-item">> OFFICER_DOSSIER</a>
                 <a href="projects.html" class="nav-item">> SERVICE_RECORDS</a>
             </nav>
         </main>
 
         <div class="hud-data" style="grid-row: 3; align-self: end;">
-            SYS: WALLACE_OS_V4.2<br>
-            LOC: ULAANBAATAR_NODE_07
+            <div id="system-log">> STANDBY...</div>
+            LOC: 35.6895° N, 139.6917° E
         </div>
         
         <div class="hud-data" style="grid-row: 3; grid-column: 3; align-self: end; text-align: right;">
-            BATT: 88% [||||||--]<br>
-            © 2026 TPD_INTEL
+            BATT: 94% [#######-] <br>
+            TERM: ARCHIVE_V2.0.26
         </div>
     </div>
 
-    <audio id="scan-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
-
     <script>
-        // 1. Authenticate / Hide Overlay
+        // 1. Authenticate & Start Typewriter
         function authenticate() {
-            const sound = document.getElementById('scan-sound');
-            sound.play();
-            document.getElementById('login-overlay').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('login-overlay').style.display = 'none';
-            }, 500);
+            document.getElementById('login-overlay').classList.add('hidden');
+            
+            const titleElement = document.getElementById('typewriter-title');
+            const text = "CENTRAL_ARCHIVE";
+            let i = 0;
+
+            function typeWriter() {
+                if (i < text.length) {
+                    titleElement.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 80);
+                }
+            }
+            setTimeout(typeWriter, 700);
         }
 
-        // 2. Live Terminal Clock
+        // 2. Live Clock
         function updateClock() {
             const now = new Date();
-            const timeStr = now.getHours().toString().padStart(2, '0') + ":" + 
-                            now.getMinutes().toString().padStart(2, '0') + ":" + 
-                            now.getSeconds().toString().padStart(2, '0');
-            document.getElementById('live-clock').innerText = timeStr;
+            document.getElementById('live-clock').innerText = now.toLocaleTimeString('en-GB');
         }
         setInterval(updateClock, 1000);
         updateClock();
+
+        // 3. Randomized System Log
+        const logs = [
+            "> SCANNING_NODE_07...",
+            "> ENCRYPTION_VERIFIED",
+            "> BYPASSING_FIREWALL...",
+            "> ARCHIVE_SYNC_OK",
+            "> TRACING_IP_LOCAL...",
+            "> ACCESS_LOGGED"
+        ];
+        setInterval(() => {
+            const logBox = document.getElementById('system-log');
+            logBox.innerText = logs[Math.floor(Math.random() * logs.length)];
+        }, 3500);
     </script>
 
 </body>
