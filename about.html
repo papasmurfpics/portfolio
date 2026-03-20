@@ -2,143 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OFFICER_DOSSIER | TPD_INTERNAL</title>
+    <title>OFFICER_DOSSIER | TPD</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Specific layouts for the Dossier */
-        .dossier-grid {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 40px;
-            width: 100%;
-            height: 100%;
-            align-items: start;
+        body { animation: entry-glitch 0.4s ease-out; }
+        @keyframes entry-glitch {
+            0% { opacity: 0; filter: brightness(3) contrast(2); transform: scale(1.05); }
+            100% { opacity: 1; filter: brightness(1); transform: scale(1); }
         }
-
-        .data-label {
-            color: var(--neon);
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        .data-value {
-            font-size: 1.4rem;
-            color: #fff;
-            margin-bottom: 20px;
-            border-left: 2px solid var(--dim);
-            padding-left: 10px;
-        }
-
-        .bio-text {
-            line-height: 1.5;
-            font-size: 1.1rem;
-            color: var(--text);
-            background: rgba(126, 194, 194, 0.05);
-            padding: 15px;
-            border: 1px solid var(--dim);
-        }
-
-        .back-btn {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            color: var(--neon);
-            text-decoration: none;
-            font-size: 1rem;
-        }
-        
-        .back-btn:hover { text-shadow: 0 0 10px var(--neon); }
+        .dossier-grid { display: grid; grid-template-columns: 280px 1fr; gap: 40px; width: 100%; height: 100%; }
+        .data-label { color: var(--neon); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 5px; display: block; }
+        .data-value { font-size: 1.4rem; color: #fff; margin-bottom: 20px; border-left: 2px solid var(--dim); padding-left: 10px; }
+        .bio-text { line-height: 1.5; font-size: 1.1rem; color: var(--text); background: rgba(126, 194, 194, 0.05); padding: 15px; border: 1px solid var(--dim); }
+        .back-btn { position: absolute; top: -40px; left: 0; color: var(--neon); text-decoration: none; }
     </style>
 </head>
 <body>
-
     <div id="cursor"></div>
-
     <div class="hud-frame">
         <div class="corner tl"></div><div class="corner tr"></div>
         <div class="corner bl"></div><div class="corner br"></div>
 
-        <div style="grid-column: 1; font-size: 1rem; color: var(--dim);">
-            FILE: ARCH_OFFICER_77<br>
-            LOCATION: SECURE_VAULT_B
-        </div>
-        
-        <div style="grid-column: 3; text-align: right; font-size: 1rem; color: var(--dim);">
-            ENCRYPTION: AES-256<br>
-            STATUS: <span style="color: #00ff41;">AUTHORIZED_VIEW</span>
-        </div>
-
-        <main class="main-display" style="grid-column: 1 / 4; align-items: stretch; position: relative;">
-            
-            <a href="index.html" class="back-btn">< RETURN_TO_TERMINAL</a>
-
+        <main class="main-display" style="grid-column: 1/4; align-items: stretch; position: relative;">
+            <a href="index.html" class="back-btn">< BACK_TO_TERMINAL</a>
             <div class="dossier-grid">
-                
                 <div style="text-align: center;">
                     <div class="photo-scan-container" style="width: 250px; height: 320px; margin: 0 auto;">
-                        <img src="images/profile.jpg" alt="Officer Portrait" class="id-photo">
+                        <img src="images/profile.jpg" alt="Officer" class="id-photo">
                     </div>
-                    <div style="background: var(--re-red); color: white; padding: 5px; font-weight: bold; margin-top: 10px; letter-spacing: 3px;">
-                        RANK: SENIOR_ARCHITECT
-                    </div>
+                    <div style="background: var(--re-red); color: white; padding: 5px; margin-top: 10px; letter-spacing: 3px;">RANK: SENIOR_ARCHITECT</div>
                 </div>
 
-                <div style="overflow-y: auto; max-height: 100%; padding-right: 10px;">
-                    <h1 class="subject-name" style="text-align: left; font-size: 3rem; margin-bottom: 5px;">OFFICER_NAME_HERE</h1>
+                <div style="overflow-y: auto;">
+                    <h1 class="subject-name" style="text-align: left; font-size: 3rem;">OFFICER_K</h1>
                     <div style="font-family: 'DotGothic16'; color: var(--neon); margin-bottom: 30px;">警視庁 // 職員名簿</div>
-
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div>
-                            <span class="data-label">ASSIGNED_SECTOR</span>
-                            <div class="data-value">TOKYO_CENTRAL</div>
-                        </div>
-                        <div>
-                            <span class="data-label">CLEARANCE_LEVEL</span>
-                            <div class="data-value">LEVEL_09</div>
-                        </div>
-                        <div>
-                            <span class="data-label">SPECIALIZATION</span>
-                            <div class="data-value">SYSTEM_INTEGRITY</div>
-                        </div>
-                        <div>
-                            <span class="data-label">BORN</span>
-                            <div class="data-value">200X // UNKNOWN</div>
-                        </div>
+                        <div><span class="data-label">SECTOR</span><div class="data-value">TOKYO_09</div></div>
+                        <div><span class="data-label">CLEARANCE</span><div class="data-value">LEVEL_09</div></div>
                     </div>
-
-                    <span class="data-label" style="margin-top: 20px;">BACKGROUND_SUMMARY</span>
-                    <p class="bio-text">
-                        Officer identified as a key operative in the 2026 infrastructure overhaul. 
-                        Known for high-efficiency coding and interface design. Subject shows high 
-                        aptitude for neural-link architecture and creative problem solving within 
-                        restricted network environments.
-                    </p>
-
-                    <div style="margin-top: 20px; display: flex; gap: 10px;">
-                         <div style="flex: 1; height: 20px; background: var(--dim); position: relative;">
-                             <div style="position: absolute; width: 85%; height: 100%; background: var(--neon); box-shadow: 0 0 10px var(--neon);"></div>
-                             <span style="position: absolute; font-size: 0.7rem; left: 5px; color: black; font-weight: bold;">SKILL_STABILITY: 85%</span>
-                         </div>
-                    </div>
+                    <span class="data-label">BIO_SUMMARY</span>
+                    <p class="bio-text">Specialist in neural-link architecture and encrypted data retrieval. Current mission: Maintaining Central Archive integrity.</p>
                 </div>
             </div>
         </main>
-
-        <div class="hud-data" style="grid-row: 3; align-self: end;">
-            LOG_ID: 8829-X<br>
-            TIMESTAMP: 2026.03.20
-        </div>
-        <div class="hud-data" style="grid-row: 3; grid-column: 3; align-self: end; text-align: right;">
-            TOKYO METRO PD INTERNAL<br>
-            DO NOT DISTRIBUTE
-        </div>
     </div>
-
     <script>
-        // Custom Cursor Logic
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
