@@ -3,56 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S.Y.S.T.E.M_OVERRIDE</title>
+    <title>Resident Evil | Project 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="background-subject"></div>
+    <div class="bg-video-effect"></div>
 
-    <main class="full-screen-hud">
+    <main class="title-screen">
         
-        <nav class="side-menu">
-            <a href="index.html" class="menu-item">
-                <span>01 // メイン</span>
-                CONTINUE_
+        <h1 class="game-logo">BIOHAZARD<span>_USER</span></h1>
+
+        <nav class="menu-container">
+            <a href="about.html" class="menu-btn">
+                ABOUT <small>個人情報</small>
             </a>
-            <a href="about.html" class="menu-item">
-                <span>02 // データ</span>
-                PERSONNEL_FILES
+            
+            <a href="projects.html" class="menu-btn">
+                QUESTS <small>任務ログ</small>
             </a>
-            <a href="projects.html" class="menu-item">
-                <span>03 // 任務</span>
-                ACTIVE_QUESTS
+
+            <a href="#" class="menu-btn">
+                RECORDS <small>記録</small>
             </a>
-            <a href="#" class="menu-item">
-                <span>04 // 設定</span>
-                SYSTEM_OPTIONS
+
+            <a href="#" class="menu-btn" style="opacity: 0.5;">
+                EXIT <small>終了</small>
             </a>
         </nav>
 
-        <section class="hud-display">
-            <div class="header-data">
-                <p style="color: var(--hazard-red); margin: 0;">[ WARNING: BIO-SIGNATURE DETECTED ]</p>
-                <h1 class="glitch-title">PLAYER_01</h1>
-                <p style="letter-spacing: 5px;">GRADE 12 // ICT ARCHITECT // TOKYO_NODE</p>
+        <div class="bottom-hud">
+            <div class="condition-box">
+                <span class="pulse"></span> CONDITION: FINE // 2026.03.20
             </div>
-
-            <div class="technical-stats">
-                <div class="status-row"><span>SYNC_LEVEL:</span> <span>98.4%</span></div>
-                <div class="status-row"><span>HEART_RATE:</span> <span>STABLE (72 BPM)</span></div>
-                <div class="status-row"><span>LOCATION:</span> <span>UNDEFINED // SHIBUYA_7</span></div>
-                
-                <div class="jp-alert" style="margin-top: 20px;">
-                    システムエラー // 警告: 未承認のアクセス
-                </div>
+            <div style="font-size: 0.7rem; color: #444; text-align: right;">
+                SYSTEM_ID: ARCHITECT_G12<br>
+                LOC: TOKYO_SERVER_07
             </div>
-
-            <div class="footer-meta" style="font-size: 0.7rem; color: #444;">
-                UMBRELLA OS v4.0.2 // ARCHIVE_088-A<br>
-                © 2026 RESEARCH & DEVELOPMENT
-            </div>
-        </section>
+        </div>
 
     </main>
 
