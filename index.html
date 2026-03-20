@@ -3,43 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personnel_File_01</title>
+    <title>Personnel Terminal | v2.0.4</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="logo">BIOHAZARD</div>
+        <div class="logo">NODE<span>_01</span></div>
         <div class="nav-links">
-            <a href="index.html">DASHBOARD</a>
-            <a href="about.html">BIODATA</a>
-            <a href="projects.html">ARCHIVES</a>
+            <a href="index.html" class="active">HOME // ホーム</a>
+            <a href="about.html">ABOUT // プロフィール</a>
+            <a href="projects.html">QUESTS // クエスト</a>
         </div>
     </nav>
 
-    <div class="container">
-        <div class="terminal-card">
-            <div class="hazard-tape"></div>
-            <div class="vertical-jp">警告・システム異常</div>
+    <main class="hero-container">
+        <div class="glass-panel">
             
-            <div class="profile-hex">
-                <img src="images/profile.jpg" alt="Subject Profile">
+            <div class="profile-wrapper">
+                <div class="hex-frame">
+                    <img src="images/profile.jpg" alt="Personnel" class="profile-img">
+                </div>
             </div>
 
-            <h1 style="text-align: center; font-family: 'Stalinist One'; color: var(--blood-red);">[YOUR NAME]</h1>
-            <p style="text-align: center; color: #666; font-size: 0.8rem;">ID: #SHIBUYA-RE-2026</p>
+            <div class="info-section">
+                <span class="jp-title">デジタル・アーキテクト</span>
+                <h1 class="name-title">[YOUR NAME]</h1>
+                <p class="tagline">SYSTEM_ARCHITECT // GRADE 12 // TOKYO_INTEL</p>
+                
+                <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; max-width: 450px;">
+                    Specializing in high-performance digital interfaces and tactical software deployment. 
+                    Authorized access only. System status: <span style="color: var(--accent-cyan);">STABLE</span>.
+                </p>
 
-            <div style="margin-top: 2rem;">
-                <span class="status-label">SYSTEM SYNC (HTML/CSS)</span>
-                <div class="status-container"><div class="status-fill" style="width: 88%;"></div></div>
-
-                <span class="status-label">DATA RETRIEVAL (JS)</span>
-                <div class="status-container"><div class="status-fill" style="width: 65%;"></div></div>
+                <div class="btn-group">
+                    <a href="projects.html" class="btn btn-primary">Initialize Access</a>
+                    <a href="about.html" class="btn btn-secondary">System Logs</a>
+                </div>
             </div>
 
-            <a href="about.html" class="btn-action">ACCESS PERSONNEL LOGS</a>
         </div>
-    </div>
+    </main>
 
 </body>
 </html>
