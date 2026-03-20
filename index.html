@@ -3,29 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | System Terminal</title>
+    <title>Start Game | Welcome</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">PORTFOLIO.SYS</div>
+        <div class="logo">PLAYER_ONE.EXE</div>
         <div class="nav-links">
-            <a href="index.html" class="active">HOME</a>
-            <a href="about.html">ABOUT</a>
-            <a href="projects.html">QUESTS</a>
+            <a href="index.html" class="active">ホーム (HOME)</a>
+            <a href="about.html">プロフィール (ABOUT)</a>
+            <a href="projects.html">クエスト (QUESTS)</a>
         </div>
     </nav>
 
     <div class="container">
-        <div class="game-card" style="text-align: center;">
-            <div class="hex-frame">
-                <img src="images/profile.jpg" alt="Player" class="profile-img">
+        <div class="game-card">
+            <div class="side-tag">いらっしゃいませ</div>
+            <img src="images/profile.jpg" alt="Avatar" class="profile-img">
+            <h1 style="text-align:center; font-family:'Orbitron'; color:var(--kawaii-pink);">USER: [YOUR NAME]</h1>
+            <p style="text-align:center; font-size: 1.2rem;">Ready to start the adventure? ☆</p>
+            
+            <div style="margin-top:2rem;">
+                <span class="stat-label">ENERGY LEVEL</span>
+                <div class="stat-bar"><div class="fill" style="width: 100%;"></div></div>
             </div>
-            <h1>PLAYER: [YOUR NAME]</h1>
-            <p style="color: var(--secondary-cyan);">LEVEL 12 ICT STUDENT</p>
-            <hr style="border: 0.5px solid rgba(139, 92, 246, 0.3); margin: 2rem 0;">
-            <p>Welcome to the main interface. Explore the logs to view my skills and completed quests.</p>
-            <a href="projects.html" style="display:inline-block; margin-top: 20px; color: var(--primary-purple); font-weight: bold; text-decoration: none;">> ACCESS_FILES</a>
+            
+            <a href="about.html" class="btn">PRESS START</a>
         </div>
     </div>
 </body>
