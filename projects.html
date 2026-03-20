@@ -3,37 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quests | Archive</title>
+    <title>SERVICE_RECORD | MISSIONS</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">PORTFOLIO.SYS</div>
-        <div class="nav-links">
-            <a href="index.html">HOME</a>
-            <a href="about.html">ABOUT</a>
-            <a href="projects.html" class="active">QUESTS</a>
-        </div>
-    </nav>
 
-    <div class="container">
-        <div class="game-card">
-            <h2>> COMPLETED_QUESTS</h2>
-            <div class="grid">
-                <div class="project-item">
-                    <h3>Quest 01: Calculator</h3>
-                    <p>Developed a functional JS calculator with a custom HUD interface.</p>
+    <div class="hud-frame">
+        <div class="corner tl"></div><div class="corner tr"></div>
+        <div class="corner bl"></div><div class="corner br"></div>
+
+        <div class="hud-data"><a href="index.html" style="color: var(--neon); text-decoration: none;">< MAIN_MENU</a></div>
+
+        <main class="main-display" style="grid-column: 1/4; align-items: flex-start; overflow-y: auto;">
+            <h1 class="subject-name" style="margin-bottom: 5px;">SERVICE_RECORD</h1>
+            <div class="jp-sub">活動記録 // MISSION_LOG</div>
+
+            <div class="nav-group" style="width: 100%; max-width: none; margin-top: 20px;">
+                
+                <div style="border: 1px solid var(--dim); padding: 20px; margin-bottom: 15px; position: relative;">
+                    <span style="position: absolute; top: 10px; right: 20px; color: #00ff00;">[COMPLETED]</span>
+                    <h3 style="color: var(--neon); margin: 0;">CASE_01: STUDENT COUNCIL DEPLOYMENT</h3>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Managed organizational logistics and student body communications. (Extracurricular Role)</p>
                 </div>
-                <div class="project-item">
-                    <h3>Quest 02: Python Script</h3>
-                    <p>Automated a simple data logging system for school projects.</p>
+
+                <div style="border: 1px solid var(--dim); padding: 20px; margin-bottom: 15px; position: relative;">
+                    <span style="position: absolute; top: 10px; right: 20px; color: #00ff00;">[COMPLETED]</span>
+                    <h3 style="color: var(--neon); margin: 0;">CASE_02: VARSITY BASKETBALL UNIT</h3>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Physical conditioning and team coordination. Specialized in high-speed defense.</p>
                 </div>
-                <div class="project-item">
-                    <h3>Quest 03: UI Portfolio</h3>
-                    <p>Designed a glassmorphism style website for the Term Project.</p>
+
+                <div style="border: 1px solid var(--dim); padding: 20px; position: relative;">
+                    <span style="position: absolute; top: 10px; right: 20px; color: var(--neon);">[IN_PROGRESS]</span>
+                    <h3 style="color: var(--neon); margin: 0;">CASE_03: CYBER_SECURITY CLUB</h3>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Testing network vulnerabilities and exploring AI-driven UI solutions.</p>
                 </div>
+
             </div>
-        </div>
+        </main>
     </div>
+
 </body>
 </html>
