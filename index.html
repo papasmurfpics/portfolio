@@ -11,9 +11,16 @@
 
     <div id="login-overlay" onclick="runBiometrics()">
         <div style="font-family: 'DotGothic16'; color: var(--neon); margin-bottom: 10px;">警視庁 // AUTHENTICATION</div>
-        <h2 id="log-status" style="font-size: 3rem; color: #fff; letter-spacing: 10px;">RESTRICTED</h2>
+        <h2 id="log-status" style="font-size: 3.5rem; color: #fff; letter-spacing: 8px;">RESTRICTED</h2>
         <div class="scan-bar" id="bar-container"><div id="scan-progress"></div></div>
         <p id="instruction" style="color: var(--dim); margin-top: 20px;">[ CLICK TO INITIATE BIOMETRIC SCAN ]</p>
+    </div>
+
+    <div id="loader-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:100000; flex-direction:column; justify-content:center; align-items:center;">
+        <div id="load-text" style="color:var(--neon); font-size:2rem; margin-bottom:10px; font-family:'VT323';">DECRYPTING_FILE...</div>
+        <div style="width:300px; height:2px; background:var(--dim);">
+            <div id="load-bar" style="width:0%; height:100%; background:var(--neon); box-shadow:0 0 10px var(--neon);"></div>
+        </div>
     </div>
 
     <div class="hud-frame" id="main-frame">
@@ -36,26 +43,28 @@
             <h1 class="subject-name" id="title-text"></h1>
             
             <nav class="nav-group">
-                <a href="about.html" class="nav-item">> OFFICER_DOSSIER</a>
+                <a href="javascript:void(0)" onclick="transitionToDossier()" class="nav-item">> OFFICER_DOSSIER</a>
                 <a href="projects.html" class="nav-item">> SERVICE_RECORDS</a>
             </nav>
         </main>
     </div>
 
+    <audio id="snd-scan" src="https://www.soundjay.com/button/sounds/button-20.mp3"></audio>
+    <audio id="snd-success" src="https://www.soundjay.com/button/sounds/button-09.mp3"></audio>
+
     <script>
-        // Cursor
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        // Biometrics
         function runBiometrics() {
             const bar = document.getElementById('bar-container');
             const progress = document.getElementById('scan-progress');
             const status = document.getElementById('log-status');
             const instruct = document.getElementById('instruction');
+            document.getElementById('snd-scan').play();
 
             instruct.style.display = 'none';
             bar.style.display = 'block';
@@ -69,6 +78,7 @@
                     clearInterval(timer);
                     status.innerText = "ACCESS GRANTED";
                     status.style.color = "#00ff41";
+                    document.getElementById('snd-success').play();
                     setTimeout(() => {
                         document.getElementById('login-overlay').style.opacity = '0';
                         setTimeout(() => {
@@ -81,7 +91,28 @@
             }, 150);
         }
 
-        // Typewriter
+        function transitionToDossier() {
+            const loader = document.getElementById('loader-overlay');
+            const bar = document.getElementById('load-bar');
+            const text = document.getElementById('load-text');
+            loader.style.display = 'flex';
+            document.getElementById('snd-scan').play();
+            
+            let width = 0;
+            const interval = setInterval(() => {
+                width += Math.random() * 25;
+                if (width >= 100) {
+                    width = 100;
+                    clearInterval(interval);
+                    text.innerText = "FILE_READY";
+                    text.style.color = "#00ff41";
+                    document.getElementById('snd-success').play();
+                    setTimeout(() => { window.location.href = "about.html"; }, 600);
+                }
+                bar.style.width = width + "%";
+            }, 100);
+        }
+
         function typeTitle() {
             const title = document.getElementById('title-text');
             const str = "CENTRAL_ARCHIVE";
@@ -93,24 +124,9 @@
             }, 100);
         }
 
-        // Clock
         setInterval(() => {
             document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-GB');
         }, 1000);
-
-        // Frame Flash on Hover
-        document.querySelectorAll('.nav-item').forEach(btn => {
-            btn.addEventListener('mouseenter', () => {
-                const frame = document.getElementById('main-frame');
-                frame.style.borderColor = 'var(--re-red)';
-                frame.style.boxShadow = 'inset 0 0 20px rgba(188, 0, 45, 0.2)';
-            });
-            btn.addEventListener('mouseleave', () => {
-                const frame = document.getElementById('main-frame');
-                frame.style.borderColor = 'var(--dim)';
-                frame.style.boxShadow = 'none';
-            });
-        });
     </script>
 </body>
 </html>
