@@ -3,70 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>METROPOLITAN POLICE | ARCHIVE</title>
+    <title>METRO_POLICE | ARCHIVE_088</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="hud-frame">
-        <div class="corner tl"></div>
-        <div class="corner tr"></div>
-        <div class="corner bl"></div>
-        <div class="corner br"></div>
+    <div id="login-overlay" onclick="authenticate()">
+        <div style="font-family: 'DotGothic16'; color: var(--neon); font-size: 1rem; margin-bottom: 10px;">警視庁 - 制限エリア</div>
+        <h2 style="font-size: 3rem; color: #fff; letter-spacing: 10px;">RESTRICTED</h2>
+        <p style="color: var(--dim); margin-top: 20px; animation: pulse 1.5s infinite;">[ CLICK TO SCAN BIOMETRICS ]</p>
+    </div>
 
-        <div class="hud-data" style="grid-column: 1; grid-row: 1;">
-            UNIT: TOKYO_METRO_PD<br>
-            TERM_ID: 088-A
+    <div class="hud-frame">
+        <div class="corner tl"></div><div class="corner tr"></div>
+        <div class="corner bl"></div><div class="corner br"></div>
+
+        <div class="hud-data" style="grid-column: 1;">
+            DEPT: TOKYO_METRO_PD<br>
+            UNIT: SEC_9_ARCHIVE
         </div>
         
-        <div class="hud-data" style="grid-column: 3; grid-row: 1; text-align: right;">
-            SYSTEM_STATUS: <span style="color: #00ff00;">ENCRYPTED</span><br>
-            AUTH_LEVEL: 09_OVERRIDE
+        <div class="hud-data" style="grid-column: 3; text-align: right;">
+            TIME: <span id="live-clock">00:00:00</span><br>
+            AUTH: <span style="color: #00ff00;">GRANTED</span>
         </div>
 
         <main class="main-display">
-            <div style="font-family: 'DotGothic16'; font-size: 1.2rem; color: var(--neon); margin-bottom: 5px;">警視庁</div>
-            <h1 class="subject-name" style="font-size: 2.5rem; border-bottom: 2px solid var(--neon); padding-bottom: 10px; margin-bottom: 20px;">CENTRAL_ARCHIVE</h1>
+            <div style="font-family: 'DotGothic16'; font-size: 1.2rem; color: var(--neon);">公式記録</div>
+            <h1 class="subject-name">CENTRAL_ARCHIVE</h1>
             
-            <p style="text-align: center; font-size: 0.9rem; margin-bottom: 30px; letter-spacing: 2px; color: var(--dim);">
-                UNAUTHORIZED ACCESS TO POLICE RECORDS IS A FEDERAL OFFENSE.<br>
-                PROCEED TO OFFICER IDENTIFICATION.
+            <p style="text-align: center; color: var(--dim); max-width: 400px; line-height: 1.2;">
+                WARNING: INTERNAL AFFAIRS MONITORING ACTIVE. 
+                ALL ACCESS LOGS ARE PERMANENT.
             </p>
 
-            <div class="nav-group">
-                <a href="about.html" class="nav-item">> [ OFFICER_DOSSIER ]</a>
-                <a href="projects.html" class="nav-item">> [ SERVICE_RECORD ]</a>
-            </div>
+            <nav class="nav-group">
+                <a href="about.html" class="nav-item">> OFFICER_DOSSIER</a>
+                <a href="projects.html" class="nav-item">> SERVICE_RECORDS</a>
+            </nav>
         </main>
 
         <div class="hud-data" style="grid-row: 3; align-self: end;">
-            RECORDS_V4.1<br>
-            SECURE_CONNECTION
+            SYS: WALLACE_OS_V4.2<br>
+            LOC: SHIBUYA_NODE_07
         </div>
         
         <div class="hud-data" style="grid-row: 3; grid-column: 3; align-self: end; text-align: right;">
-            PROPERTY OF TOKYO PD<br>
-            © 2026 INTERNAL AFFAIRS
+            BATT: 88% [||||||--]<br>
+            © 2026 TPD_INTEL
         </div>
     </div>
 
+    <audio id="scan-sound" src="https://www.soundjay.com/buttons/beep-01a.mp3"></audio>
+
+    <script>
+        // 1. Authenticate / Hide Overlay
+        function authenticate() {
+            const sound = document.getElementById('scan-sound');
+            sound.play();
+            document.getElementById('login-overlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('login-overlay').style.display = 'none';
+            }, 500);
+        }
+
+        // 2. Live Terminal Clock
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ":" + 
+                            now.getMinutes().toString().padStart(2, '0') + ":" + 
+                            now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('live-clock').innerText = timeStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+
 </body>
 </html>
-}
-<audio id="click-sound" src="sounds/click.mp3"></audio>
-
-<script>
-    const sound = document.getElementById("click-sound");
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            sound.currentTime = 0;
-            sound.play();
-        });
-    });
-</script>
-<div id="login-overlay" onclick="this.style.display='none'" style="position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:9999; display:flex; justify-content:center; align-items:center; cursor:pointer;">
-    <div style="text-align:center; font-family:'VT323'; color:var(--neon);">
-        <h2 style="font-size:3rem;">[ RESTRICTED ACCESS ]</h2>
-        <p style="letter-spacing:5px;">CLICK TO AUTHENTICATE BIOMETRICS</p>
-    </div>
-</div>
