@@ -5,7 +5,7 @@
     --neon: #7ec2c2;
     --dim: #2a3c3c;
     --text: #9cb4b4;
-    --re-red: #8a0303;
+    --re-red: #bc002d;
 }
 
 * {
@@ -27,30 +27,35 @@ body {
     align-items: center;
 }
 
-/* --- CRT Master Effects --- */
+/* --- CRT & NOISE OVERLAYS --- */
+.noise {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Grain_Noise.jpg');
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 2000;
+    mix-blend-mode: overlay;
+}
+
 body::before {
     content: "";
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
     background-size: 100% 3px;
-    z-index: 1000;
+    z-index: 1500;
     pointer-events: none;
-    opacity: 0.6;
 }
 
-/* Moving Scanline Bar */
 body::after {
     content: "";
     position: fixed;
-    top: -100px;
-    left: 0;
-    width: 100%;
-    height: 5px;
+    top: -100px; left: 0; width: 100%; height: 5px;
     background: rgba(126, 194, 194, 0.1);
-    box-shadow: 0 0 15px rgba(126, 194, 194, 0.3);
+    box-shadow: 0 0 15px rgba(126, 194, 194, 0.2);
     animation: scanline-move 10s linear infinite;
-    z-index: 1001;
+    z-index: 1600;
     pointer-events: none;
 }
 
@@ -59,7 +64,7 @@ body::after {
     100% { top: 110%; }
 }
 
-/* --- Main Layout --- */
+/* --- HUD FRAME --- */
 .hud-frame {
     width: 95vw;
     height: 90vh;
@@ -71,7 +76,6 @@ body::after {
     padding: 30px;
 }
 
-/* Corner Brackets */
 .corner {
     position: absolute;
     width: 30px; height: 30px;
@@ -84,81 +88,105 @@ body::after {
 .br { bottom: -5px; right: -5px; border-left: 0; border-top: 0; }
 
 .hud-data {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--dim);
     text-transform: uppercase;
-    line-height: 1.2;
 }
 
-/* --- Center Terminal --- */
+/* --- REC INDICATOR --- */
+.rec-indicator {
+    color: var(--re-red);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+
+.dot {
+    width: 8px; height: 8px;
+    background-color: var(--re-red);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--re-red);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+/* --- CENTER DISPLAY --- */
 .main-display {
     grid-column: 2;
     grid-row: 2;
     border: 1px solid var(--neon);
-    background: rgba(126, 194, 194, 0.02);
+    background: rgba(126, 194, 194, 0.01);
     padding: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
 }
 
 .subject-name {
-    font-size: 4rem;
+    font-size: 3.8rem;
     color: #fff;
-    margin: 10px 0;
-    letter-spacing: 8px;
+    letter-spacing: 6px;
     text-align: center;
+    min-height: 4.5rem; /* Prevents layout jump during typing */
 }
 
 .subject-name:hover {
-    animation: glitch-anim 0.2s infinite;
-    cursor: pointer;
+    animation: glitch 0.2s infinite;
 }
 
-@keyframes glitch-anim {
-  0% { text-shadow: 3px 0 var(--neon), -3px 0 var(--re-red); transform: translate(0); }
-  20% { text-shadow: -3px 0 var(--neon), 3px 0 var(--re-red); transform: translate(-2px, 2px); }
-  100% { text-shadow: none; transform: translate(0); }
+@keyframes glitch {
+    0% { text-shadow: 3px 0 var(--neon), -3px 0 var(--re-red); transform: translate(0); }
+    50% { text-shadow: -3px 0 var(--neon), 3px 0 var(--re-red); transform: translate(-2px, 1px); }
+    100% { text-shadow: none; transform: translate(0); }
 }
 
 .nav-group {
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
 }
 
 .nav-item {
     border: 1px solid var(--dim);
-    padding: 15px;
+    padding: 12px;
     text-align: center;
     text-decoration: none;
     color: var(--text);
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     background: rgba(255,255,255,0.01);
-    transition: 0.1s;
+    transition: 0.2s;
 }
 
 .nav-item:hover {
     background: var(--neon);
     color: var(--bg);
-    box-shadow: 0 0 20px var(--neon);
-    transform: scale(1.02);
+    box-shadow: 0 0 15px var(--neon);
 }
 
-/* Biometric Overlay */
+/* --- LOGIN OVERLAY --- */
 #login-overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0; left: 0; width: 100vw; height: 100vh;
     background: #000;
-    z-index: 9999;
+    z-index: 99999;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: opacity 0.6s ease, visibility 0.6s;
+}
+
+#login-overlay.hidden { opacity: 0; visibility: hidden; }
+
+.pulse-text {
+    margin-top: 20px;
+    color: var(--dim);
+    animation: blink 1.5s infinite;
+    letter-spacing: 3px;
 }
